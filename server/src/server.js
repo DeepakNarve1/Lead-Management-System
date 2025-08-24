@@ -10,7 +10,12 @@ import leadRoutes from "./routes/leadRoutes.js";
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: true, credentials: true }));
+app.use(
+  cors({
+    origin: "https://lead-management-system-phi.vercel.app",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 

@@ -22,7 +22,8 @@ export const AuthProvider = ({ children }) => {
   const [onAuthChange, setOnAuthChange] = useState(null);
 
   // Configure axios defaults
-  axios.defaults.baseURL = "http://localhost:5000/api";
+  axios.defaults.baseURL =
+    " https://lead-management-system-n50p.onrender.com/api";
   axios.defaults.withCredentials = true; // Important for cookies
 
   // Check if user is already authenticated on app load
