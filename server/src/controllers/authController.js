@@ -32,11 +32,12 @@ export const register = async (req, res) => {
     const token = generateToken(newUser.id);
 
     // Set JWT cookie like login does
+    const isProduction = process.env.NODE_ENV === "production";
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         maxAge: 3600000, // 1 hour
       })
       .status(201)
@@ -73,11 +74,12 @@ export const login = async (req, res) => {
 
     const token = generateToken(user.id);
 
+    const isProduction = process.env.NODE_ENV === "production";
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         maxAge: 3600000, // 1 hour
       })
       .json({

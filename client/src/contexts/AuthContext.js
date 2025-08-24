@@ -22,7 +22,10 @@ export const AuthProvider = ({ children }) => {
   const [onAuthChange, setOnAuthChange] = useState(null);
 
   // Configure axios defaults
-  axios.defaults.baseURL = "http://localhost:5000/api";
+  // Prefer environment override, fallback to same-origin '/api'
+  const apiBaseUrl =
+    process.env.REACT_APP_API_URL?.replace(/\/$/, "") || "/api";
+  axios.defaults.baseURL = apiBaseUrl;
   axios.defaults.withCredentials = true; // Important for cookies
 
   // Check if user is already authenticated on app load
