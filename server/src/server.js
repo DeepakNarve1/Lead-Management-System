@@ -10,7 +10,9 @@ import leadRoutes from "./routes/leadRoutes.js";
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: true, credentials: true }));
+app.set("trust proxy", 1);
+const allowedOrigin = process.env.CLIENT_ORIGIN || true;
+app.use(cors({ origin: allowedOrigin, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
